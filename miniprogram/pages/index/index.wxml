@@ -1,0 +1,69 @@
+<view class="page-container">
+  <view class="banner">
+    <swiper class="banner-swiper" indicator-dots="true" autoplay="true" circular="true" indicator-color="rgba(255,255,255,0.5)" indicator-active-color="#ffffff">
+      <swiper-item wx:for="{{banners}}" wx:key="id">
+        <image class="banner-image" src="{{item.image}}" mode="aspectFill"/>
+      </swiper-item>
+    </swiper>
+  </view>
+
+  <view class="category-section">
+    <view class="section-title">
+      <text class="title-text">分类导航</text>
+    </view>
+    <view class="category-grid">
+      <view class="category-item" wx:for="{{categories}}" wx:key="id" bindtap="goToCategory" data-id="{{item.id}}">
+        <view class="category-icon" style="background:{{item.color}}">
+          <text class="icon-text">{{item.icon}}</text>
+        </view>
+        <text class="category-name">{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="products-section">
+    <view class="section-header">
+      <view class="section-title">
+        <text class="title-text">热门推荐</text>
+        <text class="title-sub">HOT</text>
+      </view>
+      <view class="more-btn" bindtap="goToMore">
+        <text>查看更多</text>
+        <text class="arrow">→</text>
+      </view>
+    </view>
+    <view class="products-list">
+      <view class="product-card" wx:for="{{products}}" wx:key="_id" bindtap="goToDetail" data-id="{{item._id}}">
+        <view class="product-image-wrapper">
+          <image class="product-image" src="{{item.image}}" mode="aspectFill"/>
+          <view class="product-tag" wx:if="{{item.tag}}">{{item.tag}}</view>
+        </view>
+        <view class="product-info">
+          <text class="product-name">{{item.name}}</text>
+          <text class="product-desc">{{item.description}}</text>
+          <view class="product-bottom">
+            <view class="product-price">
+              <text class="price-symbol">¥</text>
+              <text class="price-value">{{item.price}}</text>
+            </view>
+            <view class="product-sales">已售 {{item.sales}}</view>
+          </view>
+          <view class="add-btn" bindtap="handleAddToCart" data-item="{{item}}" catchtap>
+            <text>+</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="promotion-section">
+    <view class="promotion-card">
+      <view class="promotion-content">
+        <text class="promotion-title">新用户专享</text>
+        <text class="promotion-desc">首单立减10元</text>
+        <button class="promotion-btn">立即领取</button>
+      </view>
+      <image class="promotion-image" src="https://neeko-copilot.bytedance.net/api/text_to_image?prompt=cute%20milk%20tea%20cup%20with%20pink%20background%20cartoon%20style&image_size=square" mode="aspectFit"/>
+    </view>
+  </view>
+</view>

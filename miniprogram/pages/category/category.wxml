@@ -1,0 +1,51 @@
+<view class="page-container">
+  <view class="category-sidebar">
+    <view class="sidebar-header">
+      <text class="sidebar-title">全部商品</text>
+    </view>
+    <scroll-view scroll-y class="sidebar-scroll">
+      <view 
+        class="sidebar-item {{currentCategory === item.name ? 'active' : ''}}" 
+        wx:for="{{categories}}" 
+        wx:key="name"
+        bindtap="switchCategory"
+        data-category="{{item.name}}"
+      >
+        <text class="item-name">{{item.name}}</text>
+        <view class="active-indicator" wx:if="{{currentCategory === item.name}}"></view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="category-content">
+    <view class="content-header">
+      <text class="content-title">{{currentCategory}}</text>
+      <text class="content-count">共 {{currentProducts.length}} 款</text>
+    </view>
+    <scroll-view scroll-y class="content-scroll">
+      <view class="products-grid">
+        <view class="product-card" wx:for="{{currentProducts}}" wx:key="_id" bindtap="goToDetail" data-id="{{item._id}}">
+          <view class="product-image-wrapper">
+            <image class="product-image" src="{{item.image}}" mode="aspectFill"/>
+            <view class="product-tag" wx:if="{{item.tag}}">{{item.tag}}</view>
+          </view>
+          <view class="product-info">
+            <text class="product-name">{{item.name}}</text>
+            <text class="product-desc">{{item.description}}</text>
+            <view class="product-price">
+              <text class="price-symbol">¥</text>
+              <text class="price-value">{{item.price}}</text>
+            </view>
+            <view class="add-btn" bindtap="handleAddToCart" data-item="{{item}}" catchtap>
+              <text>+</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="empty-state" wx:if="{{currentProducts.length === 0}}">
+        <text class="empty-icon">🍵</text>
+        <text class="empty-text">暂无商品</text>
+      </view>
+    </scroll-view>
+  </view>
+</view>
